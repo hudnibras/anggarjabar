@@ -70,14 +70,14 @@ Sistem modern untuk mengelola data atlet, wilayah, dan kompetisi anggar di Jawa 
 
 ### Vercel
 - **Live Site**: [https://anggar-jabar.vercel.app](https://anggar-jabar.vercel.app)
-- **Repository**: [https://github.com/fncorporation/anggar-jabar](https://github.com/fncorporation/anggar-jabar)
+- **Repository**: [https://github.com/hudnibras/anggarjabar](https://github.com/hudnibras/anggarjabar)
 
 ## 👨‍💻 Developer
 
 **A.M. Hud Nibras Fadhlullah** - Lead Developer
-- **Email**: hud.nibras@fncorporation.com
-- **GitHub**: [github.com/fncorporation](https://github.com/fncorporation)
-- **Vercel**: [vercel.com/fncorporation](https://vercel.com/fncorporation)
+- **Email**: hud.nibras@gmail.com
+- **GitHub**: [github.com/hudnibras](https://github.com/hudnibras)
+
 
 ## 🎓 Tugas Akhir
 
@@ -87,6 +87,3 @@ Proyek ini dikembangkan sebagai **Tugas Akhir** untuk program **Fullstack Progra
 - **Alkademi** - Platform pembelajaran teknologi
 
 ---
-
-**Dikembangkan dengan ❤️ oleh FnCorporation untuk IKASI JABAR**  
-**Tugas Akhir Fullstack Programming with AI - Jabar Digital Academy x Alkademi**

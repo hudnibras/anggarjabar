@@ -31,7 +31,7 @@ export function RegionDetailPageClient({ region }: { region: any }) {
     <PublicLayout>
       <section className="relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10" />
-        <div className="relative h-[400px] w-full overflow-hidden">
+        <div className="relative w-full min-h-[220px] sm:min-h-[320px] lg:min-h-[400px] overflow-hidden">
           <Image
             src={region.coverImage || "/placeholder.svg"}
             alt={`${region.name} Fencing Region`}
@@ -41,8 +41,8 @@ export function RegionDetailPageClient({ region }: { region: any }) {
             sizes="100vw"
           />
         </div>
-        <div className="container absolute bottom-0 z-20 pb-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="container absolute bottom-0 left-0 right-0 z-20 pb-6 sm:pb-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between min-w-0">
             <div>
               <Link href="/regions" className="inline-flex items-center text-white/80 hover:text-white mb-2">
                 <ChevronLeft className="h-4 w-4 mr-1" />
@@ -77,7 +77,7 @@ export function RegionDetailPageClient({ region }: { region: any }) {
         </div>
       </section>
 
-      <section className="container py-8">
+      <section className="container py-6 sm:py-8 lg:py-10 page-shell">
         <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="mb-6 flex flex-wrap bg-gray-100 p-1 rounded-lg">
             <TabsTrigger 
@@ -144,7 +144,7 @@ export function RegionDetailPageClient({ region }: { region: any }) {
                     <CardTitle>Region Map</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="bg-muted rounded-md h-[300px] flex items-center justify-center">
+                    <div className="bg-muted rounded-md min-h-[200px] sm:min-h-[280px] flex items-center justify-center p-4">
                       <div className="text-center">
                         <p className="text-muted-foreground mb-2">Interactive map</p>
                         <p className="text-sm text-muted-foreground">Showing {region.name} fencing locations</p>

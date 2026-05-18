@@ -10,6 +10,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { prisma } from "@/lib/prisma"
 import { AnimatedHeroImages } from "@/components/animated-hero-images"
+import { BrandWordmark } from "@/components/brand-wordmark"
 
 interface Stats {
   athletes: number
@@ -54,29 +55,25 @@ export default async function HomePage() {
 
   return (
     <PublicLayout>
-      {/* Hero Section dengan Background Aesthetic */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
+<section className="hero-section">
+<div className="absolute inset-0">
           <Image
             src="/background.jpg"
-            alt="Hero Background"
+            alt="Latar belakang hero"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-15"
             sizes="100vw"
           />
         </div>
         
-        {/* Gradient overlay yang lebih subtle */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60"></div>
+<div className="hero-section-overlay" />
         
         {/* Additional aesthetic elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
         
         <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6">
                 <Image
                   src="/Logo.svg"
                   alt="IKASI JABAR Logo"
@@ -84,27 +81,27 @@ export default async function HomePage() {
                   height={64}
                   className="h-16 w-16"
                 />
-                <h1 className="text-4xl lg:text-5xl font-bold">
-                  IKASI<span className="bg-gradient-to-r from-yellow-400 via-blue-500 to-green-500 bg-clip-text text-transparent">JABAR</span>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl">
+                  <BrandWordmark />
                 </h1>
               </div>
-              <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-gray-100">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-4 text-primary-foreground/95">
                 Sistem Manajemen Kompetisi Anggar Regional Jawa Barat
               </h2>
-              <p className="text-lg mb-8 text-gray-300">
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 text-primary-foreground/80">
                 Platform digital terpadu untuk mengelola kompetisi anggar, data atlet, dan pengembangan olahraga anggar di Jawa Barat.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-transparent border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm transform hover:scale-105">
+                <Button asChild size="lg" variant="secondary">
                   <Link href="/athletes">Lihat Atlet</Link>
                 </Button>
-                <Button asChild size="lg" className="bg-transparent border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm transform hover:scale-105">
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent">
                   <Link href="/regions">Lihat Wilayah</Link>
                 </Button>
               </div>
             </div>
-            <div className="relative">
-              <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white border border-white/10">
+            <div className="relative min-w-0 w-full">
+              <div className="media-frame-lg bg-white border border-white/10">
                 <AnimatedHeroImages />
                 {/* Subtle glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/5"></div>
@@ -115,9 +112,9 @@ export default async function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-muted/50">
+      <section className="page-section bg-muted/50">
         <div className="container">
-          <h2 className="text-3xl font-bold text-center mb-12">Statistik IKASI JABAR</h2>
+          <h2 className="text-display text-center mb-12">Statistik IKASI JABAR</h2>
           <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
             {statsData.map((stat, index) => (
               <Card key={index} className="text-center">
@@ -135,11 +132,11 @@ export default async function HomePage() {
       </section>
 
       {/* About IKASI JABAR */}
-      <section className="py-16">
+      <section className="page-section">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Tentang IKASI JABAR</h2>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+            <div className="min-w-0">
+              <h2 className="text-display mb-6">Tentang IKASI JABAR</h2>
               <p className="text-lg mb-6">
                 Ikatan Anggar Seluruh Indonesia Jawa Barat (IKASI JABAR) adalah organisasi yang bertanggung jawab 
                 untuk mengembangkan dan memajukan olahraga anggar di seluruh wilayah Jawa Barat.
@@ -177,8 +174,8 @@ export default async function HomePage() {
                 <Link href="/about">Pelajari Lebih Lanjut</Link>
               </Button>
             </div>
-            <div className="relative">
-              <div className="relative w-full h-[400px] rounded-lg overflow-hidden bg-white">
+            <div className="relative min-w-0 w-full">
+              <div className="media-frame-lg bg-white">
                 <Image
                   src="/fencingteam.jpg"
                   alt="IKASI JABAR Team"

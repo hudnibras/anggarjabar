@@ -1,21 +1,14 @@
 import { PublicLayout } from "@/components/public-layout"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, UserCheck, Lock, Clock } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
 import { prisma } from "@/lib/prisma"
 import { AthletesClient } from "@/components/athletes-client"
+import { PageHeader } from "@/components/page-header"
 
 interface Athlete {
   id: string
   name: string
   region: string
   category: string
-  verificationStatus: string
+  status: string
   image: string
 }
 
@@ -54,7 +47,7 @@ export default async function AthletesPage() {
     name: athlete.name,
     region: athlete.region.name,
     category: athlete.category,
-    verificationStatus: 'pending',
+    status: athlete.status,
     image: athlete.image ? `${athlete.image}?f_auto,q_100` : "/placeholder.svg?height=400&width=400",
   }))
 
@@ -64,15 +57,11 @@ export default async function AthletesPage() {
 
   return (
     <PublicLayout>
-      <div className="container py-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Atlet IKASI JABAR</h1>
-            <p className="text-muted-foreground mt-2">
-              Daftar atlet terdaftar di sistem IKASI JABAR
-            </p>
-          </div>
-        </div>
+      <div className="container py-6 sm:py-8 lg:py-10 page-shell">
+        <PageHeader
+          title="Atlet IKASI JABAR"
+          description="Daftar atlet terdaftar di sistem IKASI JABAR"
+        />
 
         <AthletesClient 
           athletes={transformedAthletes}

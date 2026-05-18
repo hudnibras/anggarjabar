@@ -15,6 +15,8 @@ import { Eye, EyeOff } from "lucide-react"
 import Image from "next/image"
 import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from "sonner"
+import { BrandWordmark } from "@/components/brand-wordmark"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
 
 function LoginForm() {
   const router = useRouter()
@@ -55,9 +57,9 @@ function LoginForm() {
       console.log("SignIn result:", result)
 
       if (result?.error) {
-        toast.error("Login failed. Please check your credentials.")
+        toast.error("Login gagal. Periksa email dan kata sandi Anda.")
       } else if (result?.ok) {
-        toast.success("Login successful!")
+        toast.success("Login berhasil!")
         console.log("Login successful, redirecting to:", callbackUrl)
         
         // Force hard redirect after successful login
@@ -67,7 +69,7 @@ function LoginForm() {
       }
     } catch (error) {
       console.error("Login error:", error)
-      toast.error("An error occurred during login.")
+      toast.error("Terjadi kesalahan saat login.")
     } finally {
       setIsLoading(false)
     }
@@ -78,8 +80,8 @@ function LoginForm() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-transparent border-t-gray-400 mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
+          <LoadingSpinner size="lg" className="mb-4" />
+          <p className="text-muted-foreground">Memuat...</p>
         </div>
       </div>
     )
@@ -90,15 +92,15 @@ function LoginForm() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-transparent border-t-gray-400 mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Redirecting to admin...</p>
+          <LoadingSpinner size="lg" className="mb-4" />
+          <p className="text-muted-foreground">Mengalihkan ke dasbor admin...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-muted/40 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-muted/40 p-4 sm:p-6 w-full max-w-[100vw] overflow-x-hidden">
       <div className="absolute top-4 right-4">
       </div>
 
@@ -110,14 +112,14 @@ function LoginForm() {
           height={32}
           className="h-8 w-8"
         />
-        <span className="text-xl font-bold">IKASI JABAR</span>
+        <BrandWordmark className="text-xl" />
       </Link>
 
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Admin Login</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Masuk Admin</CardTitle>
           <CardDescription className="text-center">
-            Enter your credentials to access the admin dashboard
+            Masukkan kredensial Anda untuk mengakses dasbor admin
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -162,24 +164,24 @@ function LoginForm() {
                 htmlFor="remember"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                Remember me
+                Ingat saya
               </Label>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Logging in..." : "Login"}
+              {isLoading ? "Memproses..." : "Masuk"}
             </Button>
           </form>
         </CardContent>
                  <CardFooter className="flex flex-col">
            <div className="mt-2 text-center text-sm text-muted-foreground">
              <Link href="/" className="hover:text-primary">
-               Return to public site
+               Kembali ke situs publik
              </Link>
            </div>
-           <div className="mt-4 p-3 bg-gray-50 rounded-lg border">
-             <p className="text-xs text-gray-600 mb-1">Demo Account:</p>
-             <p className="text-xs text-gray-700">Email: <span className="font-mono">jabardigitalacademy@anggar-jabar.com</span></p>
-             <p className="text-xs text-gray-700">Password: <span className="font-mono">12345678</span></p>
+           <div className="mt-4 p-3 bg-muted rounded-lg border">
+             <p className="text-xs text-muted-foreground mb-1">Akun Demo:</p>
+             <p className="text-xs">Email: <span className="font-mono">jabardigitalacademy@anggar-jabar.com</span></p>
+             <p className="text-xs">Kata sandi: <span className="font-mono">12345678</span></p>
            </div>
          </CardFooter>
       </Card>
@@ -191,8 +193,8 @@ function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-transparent border-t-gray-400 mx-auto mb-4"></div>
-        <p className="text-muted-foreground">Loading...</p>
+        <LoadingSpinner size="lg" className="mb-4" />
+        <p className="text-muted-foreground">Memuat...</p>
       </div>
     </div>
   )

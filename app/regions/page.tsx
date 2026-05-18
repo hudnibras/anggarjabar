@@ -10,6 +10,7 @@ import Image from "next/image"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { prisma } from "@/lib/prisma"
 import { RegionsClient } from "@/components/regions-client"
+import { PageHeader } from "@/components/page-header"
 
 interface Region {
   id: string
@@ -63,15 +64,11 @@ export default async function RegionsPage() {
 
   return (
     <PublicLayout>
-      <div className="container py-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Wilayah IKASI JABAR</h1>
-            <p className="text-muted-foreground mt-2">
-              Daftar wilayah terdaftar di sistem IKASI JABAR
-            </p>
-          </div>
-        </div>
+      <div className="container py-6 sm:py-8 lg:py-10 page-shell">
+        <PageHeader
+          title="Wilayah IKASI JABAR"
+          description="Daftar wilayah terdaftar di sistem IKASI JABAR"
+        />
 
         <RegionsClient regions={transformedRegions} />
       </div>

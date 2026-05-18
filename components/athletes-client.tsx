@@ -6,16 +6,18 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight, Users } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { EmptyState } from "@/components/empty-state"
+import { getAthleteStatusLabel, getCategoryLabel } from "@/lib/athlete-utils"
 
 interface Athlete {
   id: string
   name: string
   region: string
   category: string
-  verificationStatus: string
+  status: string
   image: string
 }
 
@@ -52,7 +54,7 @@ export function AthletesClient({ athletes: initialAthletes, regions: initialRegi
         name: athlete.name,
         region: athlete.region.name,
         category: athlete.category,
-        verificationStatus: 'pending',
+        status: athlete.status,
         image: athlete.image ? `${athlete.image}?f_auto,q_100` : "/placeholder.svg?height=400&width=400",
       }))
       
@@ -126,10 +128,11 @@ export function AthletesClient({ athletes: initialAthletes, regions: initialRegi
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Fetch fresh data on component mount
-  useEffect(() => {
-    fetchAthletes()
-  }, [])
+  const handleResetFilters = () => {
+    setSearchTerm("")
+    setRegionFilter("all")
+    setCategoryFilter("all")
+  }
 
   return (
     <div>
@@ -189,7 +192,8 @@ export function AthletesClient({ athletes: initialAthletes, regions: initialRegi
       {currentAthletes.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
           {currentAthletes.map((athlete) => (
-            <Card key={athlete.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+            <Link key={athlete.id} href={`/athletes/${athlete.id}`}>
+            <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
               <div className="relative aspect-[4/5] group">
                 <Image
                   src={athlete.image}
@@ -208,27 +212,33 @@ export function AthletesClient({ athletes: initialAthletes, regions: initialRegi
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <span>{athlete.region}</span>
                     <span>•</span>
-                    <span>{athlete.category}</span>
+                    <span>{getCategoryLabel(athlete.category)}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs">
-                      {athlete.verificationStatus}
-                    </Badge>
-                  </div>
+                  <Badge
+                    variant={athlete.status === "ACTIVE" ? "default" : "secondary"}
+                    className="text-xs"
+                  >
+                    {getAthleteStatusLabel(athlete.status)}
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
+            </Link>
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">Tidak ada atlet yang ditemukan.</p>
-        </div>
+        <EmptyState
+          icon={Users}
+          title="Tidak ada atlet ditemukan"
+          description="Coba ubah kata kunci pencarian atau reset filter untuk melihat lebih banyak atlet."
+          actionLabel="Reset filter"
+          onAction={handleResetFilters}
+        />
       )}
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2 px-1">
           <Button
             variant="outline"
             size="sm"

@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 export default function PrivacyPage() {
   return (
     <PublicLayout>
-      <section className="container py-16">
-        <div className="max-w-4xl mx-auto">
+      <section className="container-narrow page-section">
+        <div className="w-full min-w-0">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Kebijakan Privasi</h1>
             <p className="text-lg text-muted-foreground">

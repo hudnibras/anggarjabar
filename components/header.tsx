@@ -6,6 +6,8 @@ import Image from "next/image"
 import { HeaderMobile } from "@/components/header-mobile"
 import { usePathname } from "next/navigation"
 import { useMemo } from "react"
+import { BrandWordmark } from "@/components/brand-wordmark"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navigation = [
   { name: "Beranda", href: "/" },
@@ -19,20 +21,19 @@ export function Header() {
   const pathname = usePathname()
 
   const navigationItems = useMemo(() => {
-    return navigation.map((item) => {
-      const isActive = pathname === item.href
-      return {
-        ...item,
-        isActive
-      }
-    })
+    return navigation.map((item) => ({
+      ...item,
+      isActive: pathname === item.href,
+    }))
   }, [pathname])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+      <div className="container flex h-14 sm:h-16 items-center gap-2 sm:gap-4 min-w-0">
+        <HeaderMobile navigation={navigation} />
+
+        <div className="mr-auto hidden min-w-0 md:flex md:items-center md:gap-6">
+          <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image
               src="/Logo.svg"
               alt="IKASI JABAR Logo"
@@ -40,20 +41,16 @@ export function Header() {
               height={32}
               className="h-8 w-8"
             />
-            <div className="flex flex-col">
-              <span className="hidden font-bold sm:inline-block text-sm leading-tight">
-                IKASI<span className="bg-gradient-to-r from-yellow-400 via-blue-500 to-green-500 bg-clip-text text-transparent">JABAR</span>
-              </span>
-            </div>
+            <BrandWordmark className="hidden text-sm leading-tight lg:inline-block" />
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium xl:gap-x-6">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`transition-colors hover:text-foreground/80 ${
-                  item.isActive 
-                    ? "text-foreground font-semibold border-b-2 border-primary" 
+                className={`whitespace-nowrap transition-colors hover:text-foreground/80 ${
+                  item.isActive
+                    ? "font-semibold text-foreground border-b-2 border-primary pb-0.5"
                     : "text-foreground/60"
                 }`}
               >
@@ -62,35 +59,28 @@ export function Header() {
             ))}
           </nav>
         </div>
-        
-        {/* Mobile Navigation */}
-        <HeaderMobile navigation={navigation} />
-        
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Link href="/" className="flex items-center space-x-2 md:hidden">
-              <Image
-                src="/Logo.svg"
-                alt="IKASI JABAR Logo"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
-              <div className="flex flex-col">
-                <span className="font-bold text-sm leading-tight">
-                  IKASI<span className="bg-gradient-to-r from-yellow-400 via-blue-500 to-green-500 bg-clip-text text-transparent">JABAR</span>
-                </span>
-              </div>
+
+        <Link href="/" className="flex min-w-0 items-center gap-2 md:hidden">
+          <Image
+            src="/Logo.svg"
+            alt="IKASI JABAR Logo"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0"
+          />
+          <BrandWordmark className="truncate text-sm leading-tight" />
+        </Link>
+
+        <nav className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+          <ThemeToggle />
+          <Button asChild size="sm" className="px-2 sm:px-4">
+            <Link href="/login">
+              <span className="hidden sm:inline">Masuk Admin</span>
+              <span className="sm:hidden">Admin</span>
             </Link>
-          </div>
-          <nav className="flex items-center space-x-2">
-            <Button asChild>
-              <Link href="/login">Masuk Admin</Link>
-            </Button>
-          </nav>
-        </div>
+          </Button>
+        </nav>
       </div>
     </header>
   )
 }
-

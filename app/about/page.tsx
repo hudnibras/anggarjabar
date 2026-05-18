@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Sword, Award, Users, BookOpen, Landmark, Heart, Swords, Trophy } from "lucide-react"
 import Image from "next/image"
+import { BrandWordmark } from "@/components/brand-wordmark"
 
 export default function AboutPage() {
   // IKASI JABAR team members data
@@ -37,7 +38,7 @@ export default function AboutPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20 overflow-hidden">
+      <section className="hero-section">
         {/* Background Image dengan efek aesthetic */}
         <div className="absolute inset-0">
           <Image
@@ -50,10 +51,9 @@ export default function AboutPage() {
         </div>
         
         {/* Gradient overlay yang lebih subtle */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60"></div>
+        <div className="hero-section-overlay" />
         
         {/* Additional aesthetic elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
         
         <div className="container relative z-10">
           <div className="text-center">
@@ -65,27 +65,27 @@ export default function AboutPage() {
                  height={64}
                  className="h-16 w-16"
                />
-               <h1 className="text-5xl lg:text-6xl font-bold">
-                 IKASI<span className="bg-gradient-to-r from-yellow-400 via-blue-500 to-green-500 bg-clip-text text-transparent">JABAR</span>
+               <h1 className="text-3xl sm:text-4xl lg:text-6xl">
+                 <BrandWordmark />
                </h1>
              </div>
-            <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-gray-100">
+            <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-primary-foreground/95">
               Ikatan Anggar Seluruh Indonesia Jawa Barat
             </h2>
-            <p className="text-lg mb-8 text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg mb-8 text-primary-foreground/80 max-w-3xl mx-auto">
               Memajukan dan mengembangkan olahraga anggar di seluruh Jawa Barat dengan dedikasi tinggi untuk menghasilkan atlet-atlet berprestasi tingkat nasional dan internasional.
             </p>
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-300">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-primary-foreground/80">
               <div className="flex items-center gap-2">
-                <Swords className="h-4 w-4 text-blue-400" />
+                <Swords className="h-4 w-4 text-secondary" />
                 <span>Est. 2010</span>
               </div>
               <div className="flex items-center gap-2">
-                <Trophy className="h-4 w-4 text-yellow-400" />
+                <Trophy className="h-4 w-4 text-secondary" />
                 <span>Prestasi Nasional</span>
               </div>
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-green-400" />
+                <Users className="h-4 w-4 text-accent" />
                 <span>Komunitas Aktif</span>
               </div>
             </div>
@@ -94,9 +94,9 @@ export default function AboutPage() {
       </section>
 
       {/* Main Content */}
-      <section className="container py-12">
+      <section className="container page-section page-shell">
         <Tabs defaultValue="mission" className="w-full">
-          <TabsList className="mb-6 flex flex-wrap bg-gray-100 p-1 rounded-lg">
+          <TabsList className="tabs-scroll mb-6 flex w-full min-w-0 flex-nowrap sm:flex-wrap bg-muted p-1 rounded-lg">
             <TabsTrigger 
               value="mission"
               className="border-0 data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-gray-200 text-gray-600 hover:text-gray-800"
@@ -203,7 +203,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
+                <div className="media-frame-lg">
                   <Image
                     src="/ikasijabar.jpg"
                     alt="IKASI JABAR Competition"
@@ -297,7 +297,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="relative w-full h-[300px] rounded-lg overflow-hidden">
+                <div className="media-frame min-h-[200px] sm:min-h-[240px]">
                   <Image
                     src="/historical.jpg"
                     alt="Historical IKASI Photo"

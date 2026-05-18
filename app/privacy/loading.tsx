@@ -1,12 +1,15 @@
 import { PublicLayout } from "@/components/public-layout"
-import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function PrivacyLoading() {
   return (
     <PublicLayout>
-      <section className="flex flex-col items-center justify-center min-h-[60vh]">
-        <LoadingSpinner size="lg" />
-      </section>
+      <div className="container-narrow py-6 sm:py-8 page-shell space-y-6">
+        <Skeleton className="h-9 w-64" />
+        <Skeleton className="h-5 w-full" />
+        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-48 w-full" />
+      </div>
     </PublicLayout>
   )
-} 
+}

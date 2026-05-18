@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 import { Badge } from "@/components/ui/badge"
-import { Search, Filter, MapPin, Users, Trophy, Swords, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, MapPin, Users, Swords, ChevronLeft, ChevronRight } from "lucide-react"
+import { EmptyState } from "@/components/empty-state"
 import Link from "next/link"
 import Image from "next/image"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -76,7 +77,7 @@ export function RegionsClient({ regions }: RegionsClientProps) {
 
       {/* Main Content */}
       <div className="py-12">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-6">
           <h2 className="text-2xl font-bold">Kota dan Kabupaten IKASI</h2>
           <div className="text-sm text-muted-foreground">
             Menampilkan {startIndex + 1}-{Math.min(endIndex, filteredRegions.length)} dari {filteredRegions.length} wilayah
@@ -111,7 +112,7 @@ export function RegionsClient({ regions }: RegionsClientProps) {
                </CardContent>
               <div className="p-6 pt-0 mt-auto flex justify-center">
                 <Link href={`/regions/${region.id}`}>
-                  <Button variant="default" className="bg-slate-700 hover:bg-slate-800 text-white border-0 shadow-sm hover:shadow-md transition-all duration-200">
+                  <Button variant="default">
                     Lihat Detail
                   </Button>
                 </Link>
@@ -122,42 +123,40 @@ export function RegionsClient({ regions }: RegionsClientProps) {
 
         {/* No results message */}
         {filteredRegions.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">
-              Tidak ada wilayah yang ditemukan dengan kriteria pencarian Anda.
-            </p>
-          </div>
+          <EmptyState
+            icon={MapPin}
+            title="Tidak ada wilayah ditemukan"
+            description="Coba ubah kata kunci pencarian atau reset filter untuk melihat daftar wilayah."
+            actionLabel="Reset pencarian"
+            onAction={() => setSearchTerm("")}
+          />
         )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-8">
-            <div className="text-sm text-muted-foreground">
+          <div className="flex flex-col gap-4 mt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground text-center sm:text-left">
               Menampilkan {startIndex + 1} sampai {Math.min(endIndex, filteredRegions.length)} dari {filteredRegions.length} hasil
-            </div>
-            <div className="flex items-center space-x-2">
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
+                className="shrink-0"
               >
-                <ChevronLeft className="h-4 w-4" />
-                Sebelumnya
+                <ChevronLeft className="h-4 w-4 sm:mr-1" />
+                <span className="hidden sm:inline">Sebelumnya</span>
               </Button>
-              <div className="flex items-center space-x-1">
+              <div className="flex flex-wrap items-center justify-center gap-1">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <Button
                     key={page}
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
                     onClick={() => handlePageChange(page)}
-                    className={cn(
-                      "w-8 h-8 p-0",
-                      currentPage === page 
-                        ? "bg-slate-700 hover:bg-slate-800 text-white border-0 shadow-sm" 
-                        : "border-slate-300 hover:bg-slate-50 text-slate-700"
-                    )}
+                    className="w-8 h-8 p-0"
                   >
                     {page}
                   </Button>
@@ -168,9 +167,10 @@ export function RegionsClient({ regions }: RegionsClientProps) {
                 size="sm"
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
+                className="shrink-0"
               >
-                Selanjutnya
-                <ChevronRight className="h-4 w-4" />
+                <span className="hidden sm:inline">Selanjutnya</span>
+                <ChevronRight className="h-4 w-4 sm:ml-1" />
               </Button>
             </div>
           </div>
@@ -181,10 +181,10 @@ export function RegionsClient({ regions }: RegionsClientProps) {
       <div className="bg-muted py-12 mt-12 rounded-lg">
         <div className="container">
           <div className="flex items-center mb-6">
-            <Swords className="h-6 w-6 text-slate-600 mr-3" />
+            <Swords className="h-6 w-6 text-primary mr-3" />
             <h2 className="text-2xl font-bold">Distribusi Regional IKASI</h2>
           </div>
-          <div className="bg-background rounded-lg border p-4 h-[400px] flex items-center justify-center">
+          <div className="bg-background rounded-lg border p-4 min-h-[200px] sm:min-h-[280px] lg:min-h-[320px] flex items-center justify-center">
             <div className="text-center">
               <p className="text-muted-foreground mb-2">Peta interaktif akan ditampilkan di sini</p>
               <p className="text-sm text-muted-foreground">

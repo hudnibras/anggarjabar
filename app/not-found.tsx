@@ -7,7 +7,7 @@ import { Swords, Home, ArrowLeft } from "lucide-react"
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/5">
-      <div className="text-center space-y-8 p-8">
+      <div className="container-narrow text-center space-y-8 p-6 sm:p-8">
         <div className="flex justify-center">
           <div className="relative">
             <Swords className="h-32 w-32 text-primary/20" />

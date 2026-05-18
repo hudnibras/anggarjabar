@@ -1,6 +1,50 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 152 32% 31%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 91% 58%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 179 83% 34%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 152 32% 31%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 6%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 152 32% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 91% 58%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 179 83% 40%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 152 32% 40%;
+}
+
 @theme {
   --color-primary: #386641;
   --color-primary-foreground: #ffffff;
@@ -38,21 +82,127 @@
   }
 }
 
-/* Custom utility untuk container agar center dan padding sesuai config lama */
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  max-width: 100%;
-}
-@utility container-2xl {
-  max-width: 1400px;
+/* Global layout: prevent horizontal scroll */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 * {
   @apply border-border;
 }
+
 body {
-  @apply bg-background text-foreground;
+  @apply bg-background text-foreground min-h-screen overflow-x-hidden;
+  width: 100%;
+}
+
+/* Primary content container — max 1280px, fluid padding */
+@utility container {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+}
+
+/* Wider shell for dashboards / data-heavy layouts */
+@utility container-wide {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+}
+
+/* Narrow prose / legal pages */
+@utility container-narrow {
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+}
+
+/* Ultra-wide: optional outer cap so content does not stretch infinitely */
+@utility container-2xl {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+@utility page-section {
+  @apply py-10 sm:py-12 lg:py-16;
+}
+
+@utility page-shell {
+  @apply w-full min-w-0 max-w-full;
+}
+
+@utility media-frame {
+  @apply relative w-full overflow-hidden rounded-lg;
+  aspect-ratio: 16 / 10;
+  min-height: 12.5rem;
+}
+
+@utility media-frame-lg {
+  @apply relative w-full overflow-hidden rounded-lg;
+  min-height: 14rem;
+  aspect-ratio: 4 / 3;
+}
+
+@utility table-wrapper {
+  @apply w-full min-w-0 overflow-x-auto rounded-md border;
+  -webkit-overflow-scrolling: touch;
+}
+
+@utility tabs-scroll {
+  @apply w-full overflow-x-auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .media-frame-lg {
+    min-height: 18rem;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 1024px) {
+  .media-frame-lg {
+    min-height: 25rem;
+    aspect-ratio: auto;
+    height: 25rem;
+  }
+}
+
+.brand-gradient {
+  @apply bg-gradient-to-r from-secondary via-accent to-primary;
+}
+
+.text-display {
+  @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight break-words;
+}
+
+.text-lead {
+  @apply text-muted-foreground text-base md:text-lg;
+}
+
+.hero-section {
+  @apply relative text-primary-foreground py-12 sm:py-16 lg:py-20 overflow-hidden;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary) 95%, black) 0%,
+    color-mix(in srgb, var(--color-primary) 80%, black) 40%,
+    color-mix(in srgb, var(--color-accent) 70%, black) 100%
+  );
+}
+
+.hero-section-overlay {
+  @apply absolute inset-0;
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-primary) 70%, transparent),
+    color-mix(in srgb, var(--color-accent) 30%, transparent)
+  );
 }
 
 /* Ensure toasts appear in front of dialogs */

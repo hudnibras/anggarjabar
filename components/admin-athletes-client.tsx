@@ -410,10 +410,10 @@ export function AdminAthletesClient({ athletes: initialAthletes }: { athletes: A
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Athletes</h1>
-        <Button onClick={handleAdd}>
-          <Plus className="mr-2 h-4 w-4" /> Add Athlete
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl sm:text-3xl font-bold">Atlet</h1>
+        <Button onClick={handleAdd} className="w-full sm:w-auto shrink-0">
+          <Plus className="mr-2 h-4 w-4" /> Tambah Atlet
         </Button>
       </div>
 
@@ -551,7 +551,7 @@ export function AdminAthletesClient({ athletes: initialAthletes }: { athletes: A
         </div>
       </div>
 
-      <div className="rounded-md border">
+      <div className="table-wrapper">
         <Table>
           <TableHeader>
             <TableRow>
@@ -655,7 +655,7 @@ export function AdminAthletesClient({ athletes: initialAthletes }: { athletes: A
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between mt-4">
+        <div className="flex flex-col gap-3 mt-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-muted-foreground">
             Showing {startIndex + 1} to {Math.min(endIndex, sortedAthletes.length)} of {sortedAthletes.length} results
           </div>

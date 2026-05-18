@@ -324,7 +324,7 @@ export function AdminRegionsClient({ regions: initialRegions }: { regions: Regio
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-3xl font-bold">Regions</h1>
         <Button onClick={handleAdd}>
           <Plus className="mr-2 h-4 w-4" /> Add Region
@@ -418,7 +418,7 @@ export function AdminRegionsClient({ regions: initialRegions }: { regions: Regio
         </div>
       </div>
 
-      <div className="rounded-md border">
+      <div className="table-wrapper">
         <Table>
           <TableHeader>
             <TableRow>

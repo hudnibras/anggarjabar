@@ -1,12 +1,12 @@
 import { PublicLayout } from "@/components/public-layout"
-import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { ListPageSkeleton } from "@/components/list-page-skeleton"
 
 export default function AthletesLoading() {
   return (
     <PublicLayout>
-      <section className="flex flex-col items-center justify-center min-h-[60vh]">
-        <LoadingSpinner size="lg" />
-      </section>
+      <div className="container py-6 sm:py-8 page-shell">
+        <ListPageSkeleton variant="grid" count={8} />
+      </div>
     </PublicLayout>
   )
 }

@@ -30,12 +30,12 @@ export interface DashboardStats {
 export default function DashboardClient({ stats }: { stats: DashboardStats }) {
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Overview of athletes and regions management</p>
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold">Dasbor</h1>
+          <p className="text-muted-foreground mt-1 text-sm sm:text-base">Ringkasan manajemen atlet dan wilayah</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 shrink-0">
           <Button asChild>
             <Link href="/admin/athletes">
               <Users className="mr-2 h-4 w-4" />
@@ -132,7 +132,7 @@ export default function DashboardClient({ stats }: { stats: DashboardStats }) {
                </div>
                <div className="space-y-3">
                  {stats.recentAthletes.slice(0, 5).map((athlete) => (
-                   <div key={athlete.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                   <div key={athlete.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                      <div className="flex items-center space-x-3">
                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                          <span className="text-xs font-medium text-primary">
@@ -178,7 +178,7 @@ export default function DashboardClient({ stats }: { stats: DashboardStats }) {
                </div>
                <div className="space-y-3">
                  {stats.recentAdmins.slice(0, 5).map((admin) => (
-                   <div key={admin.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                   <div key={admin.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                      <div className="flex items-center space-x-3">
                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                          <span className="text-xs font-medium text-primary">
@@ -218,7 +218,7 @@ export default function DashboardClient({ stats }: { stats: DashboardStats }) {
                 </div>
                 <div className="space-y-3">
                   {stats.recentActivity.slice(0, 8).map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={activity.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                           <span className="text-xs font-medium text-primary">

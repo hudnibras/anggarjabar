@@ -514,7 +514,7 @@ export default function AdminManagement() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-md border">
+          <div className="table-wrapper">
             <Table>
                              <TableHeader>
                  <TableRow>
